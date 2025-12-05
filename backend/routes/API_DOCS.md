@@ -5,15 +5,15 @@
 POST /api/auth/register          -- Create account
 POST /api/auth/login             -- Log in & get token
 
+-- User Routes
+GET /api/user/me                 -- Get profile & goals
+PUT /api/user/goals              -- Update calorie/macro goals
 
 
 
 --NOT DONE____________________________________________________
 
 
--- User Routes
-GET /api/user/me                 -- Get profile & goals
-PUT /api/user/goals              -- Update calorie/macro goals
 
 -- Daily Logs Routes
 GET /api/days/:date              -- Get log (auto-creates if missing) returns all meals and foods in those meals
