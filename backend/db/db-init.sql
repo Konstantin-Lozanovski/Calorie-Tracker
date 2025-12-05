@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS users (
     protein_goal_pct INTEGER DEFAULT 40,
     carbs_goal_pct INTEGER DEFAULT 40,
     fat_goal_pct INTEGER DEFAULT 20,
+    weight_goal NUMERIC DEFAULT NULL,
     -- This line ensures the math is always correct at the database level
     CONSTRAINT check_macro_sum CHECK (protein_goal_pct + carbs_goal_pct + fat_goal_pct = 100)
     );
