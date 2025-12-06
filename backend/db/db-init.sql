@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS meals (
     id SERIAL PRIMARY KEY,
     daily_log_id INTEGER REFERENCES daily_logs(id) ON DELETE CASCADE NOT NULL,
     meal meal_type NOT NULL,
+    meal_order INTEGER NOT NULL,
     UNIQUE(daily_log_id, meal)
     );
 
