@@ -21,8 +21,6 @@ PUT /api/days/:date/weight       -- Update weight for a date
 
 
 -- Meal Entries Routes
-DELETE /api/meals/:mealId        -- Delete a custom meal
-GET /api/meals/:mealId/entries   -- Get foods in a specific meal
 POST /api/meals/:mealId/entries  -- Add food to a meal
 PUT /api/meals/entries/:entryId        -- Update quantity of an entry
 DELETE /api/meals/entries/:entryId     -- Remove food from a meal

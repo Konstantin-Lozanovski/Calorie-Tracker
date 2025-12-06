@@ -10,11 +10,8 @@ import {
 
 const router = express.Router()
 
-// Meal Routes
-router.delete("/:mealId", deleteMeal)
 
 // Entry Routes
-router.get("/:mealId/entries", getEntries)
 router.post("/:mealId/entries", addEntry)
 router.put("/entries/:entryId", updateEntry)
 router.delete("/entries/:entryId", deleteEntry)
