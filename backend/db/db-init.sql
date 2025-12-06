@@ -26,23 +26,28 @@ CREATE TABLE IF NOT EXISTS foods (
 -- 3. Daily Logs (Linking a specific Date to a User)
 CREATE TABLE IF NOT EXISTS daily_logs (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL,
     date DATE DEFAULT CURRENT_DATE,
     weight NUMERIC,
     UNIQUE(user_id, date) -- User can't have two logs for the same day
     );
 
--- 4. Meals (Breakfast, Lunch, etc. within a Daily Log)
+-- 4. Meals (Breakfast, Lunch, Dinner and Snack within a Daily Log)
+CREATE TYPE meal_type AS ENUM ('Breakfast', 'Lunch', 'Dinner', 'Snacks');
+
 CREATE TABLE IF NOT EXISTS meals (
     id SERIAL PRIMARY KEY,
-    daily_log_id INTEGER REFERENCES daily_logs(id) ON DELETE CASCADE,
-    name VARCHAR(50) NOT NULL -- 'Breakfast', 'Lunch', etc.
+    daily_log_id INTEGER REFERENCES daily_logs(id) ON DELETE CASCADE NOT NULL,
+    meal meal_type NOT NULL,
+    UNIQUE(daily_log_id, meal)
     );
 
 -- 5. Meal Entries (The bridge/associative table between Meals and Foods)
 CREATE TABLE IF NOT EXISTS meal_entries (
     id SERIAL PRIMARY KEY,
-    meal_id INTEGER REFERENCES meals(id) ON DELETE CASCADE,
-    food_id INTEGER REFERENCES foods(id),
+    meal_id INTEGER REFERENCES meals(id) ON DELETE CASCADE NOT NULL,
+    food_id INTEGER REFERENCES foods(id) NOT NULL,
     quantity NUMERIC NOT NULL -- Amount of serving_unit
     );
+
+
