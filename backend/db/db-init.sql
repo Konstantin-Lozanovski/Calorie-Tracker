@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS foods (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
+    brand VARCHAR(100) NOT NULL,
     calories NUMERIC NOT NULL, -- per serving
     protein NUMERIC DEFAULT 0,
     carbs NUMERIC DEFAULT 0,
