@@ -1,4 +1,3 @@
-// backend/routes/user.routes.js
 import express from "express"
 import { getMe, updateGoals } from "../controllers/user.controller.js"
 

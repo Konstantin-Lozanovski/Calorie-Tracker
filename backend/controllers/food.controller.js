@@ -1,4 +1,3 @@
-// backend/controllers/food.controller.js
 import { pool } from "../src/db.js"
 
 export const searchFoods = async (req, res) => {
