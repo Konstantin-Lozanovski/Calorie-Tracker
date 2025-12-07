@@ -26,11 +26,9 @@ export const addEntry = async (req, res) => {
     }
 
     const entryResult = await pool.query(
-        `
-        INSERT INTO meal_entries(meal_id, food_id, quantity) 
+        `INSERT INTO meal_entries(meal_id, food_id, quantity) 
         VALUES ($1, $2, $3) 
-        RETURNING id, meal_id, food_id, quantity
-        `,
+        RETURNING id, meal_id, food_id, quantity`,
         [mealId, foodId, quantity]
     )
     const entry = entryResult.rows[0]
@@ -47,11 +45,9 @@ export const updateEntry = async (req, res) => {
 
     if(quantity === 0){
         const result = await pool.query(
-            `
-            DELETE FROM meal_entries
+            `DELETE FROM meal_entries
             WHERE id = $1
-            RETURNING id
-            `,
+            RETURNING id`,
             [entryId]
         )
 
@@ -62,12 +58,10 @@ export const updateEntry = async (req, res) => {
     }
 
     const updateResult = await pool.query(
-        `
-        UPDATE meal_entries
+        `UPDATE meal_entries
         SET quantity = $1
         WHERE id = $2
-        RETURNING id, meal_id, food_id, quantity
-        `,
+        RETURNING id, meal_id, food_id, quantity`,
         [quantity, entryId]
     )
 

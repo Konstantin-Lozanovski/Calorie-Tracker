@@ -111,12 +111,10 @@ export const updateWeight = async (req, res) => {
     if (weight <= 0) throw new BadRequestError("Weight must be positive");
 
     const result = await pool.query(
-        `
-        UPDATE daily_logs
+        `UPDATE daily_logs
         SET weight = $1
         WHERE user_id = $2 AND date = $3
-        RETURNING id, user_id, date::text, weight
-        `,
+        RETURNING id, user_id, date::text, weight`,
         [weight, userId, date]
     )
 

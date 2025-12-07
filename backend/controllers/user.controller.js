@@ -3,7 +3,8 @@ import {BadRequestError, NotFoundError} from "../errors/index.js";
 
 export const getMe = async (req, res) => {
     const result = await pool.query(
-        "SELECT id, username, calorie_goal, protein_goal_pct, carbs_goal_pct, fat_goal_pct, weight_goal FROM users WHERE id = $1",
+        `SELECT id, username, calorie_goal, protein_goal_pct, carbs_goal_pct, fat_goal_pct, weight_goal
+        FROM users WHERE id = $1`,
         [req.user.id]
     )
 
