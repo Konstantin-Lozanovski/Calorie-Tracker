@@ -41,12 +41,52 @@ export const addEntry = async (req, res) => {
 
 export const updateEntry = async (req, res) => {
     const { entryId } = req.params
+    const { quantity } = req.body
+
     if (quantity === undefined || quantity < 0) throw new BadRequestError("Provide a valid quantity");
-    res.send(`Update Entry ${entryId}`)
+
+    if(quantity === 0){
+        const result = await pool.query(
+            `
+            DELETE FROM meal_entries
+            WHERE id = $1
+            RETURNING id
+            `,
+            [entryId]
+        )
+
+        if(result.rowCount === 0) throw new BadRequestError("Entry not found")
+
+        return res.status(200).send({msg: "Entry deleted"})
+
+    }
+
+    const updateResult = await pool.query(
+        `
+        UPDATE meal_entries
+        SET quantity = $1
+        WHERE id = $2
+        RETURNING id, meal_id, food_id, quantity
+        `,
+        [quantity, entryId]
+    )
+
+    if(updateResult.rowCount === 0) throw new BadRequestError("Entry not found")
+
+    res.status(200).json(updateResult.rows[0])
 }
 
 export const deleteEntry = async (req, res) => {
-    const { entryId } = req.params
-    if (quantity === undefined || quantity < 0) throw new BadRequestError("Provide a valid quantity");
-    res.send(`Delete Entry ${entryId}`)
+    const { entryId } = req.params;
+
+    const result = await pool.query(
+        "DELETE FROM meal_entries WHERE id = $1 RETURNING id",
+        [entryId]
+    );
+
+    if (result.rowCount === 0) {
+        throw new BadRequestError("Entry not found");
+    }
+
+    return res.status(204).send();
 }
