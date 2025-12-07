@@ -4,15 +4,15 @@ import dotenv from "dotenv"
 import { pool } from "./db.js"
 import "express-async-errors"
 
-// Routers (Singular file names)
+// Routers
 import authRouter from "../routes/auth.routes.js"
 import userRouter from "../routes/user.routes.js"
-import dayRouter from "../routes/day.routes.js"   // changed from days
-import mealRouter from "../routes/meal.routes.js" // changed from meals
-import foodRouter from "../routes/food.routes.js" // changed from foods
+import dayRouter from "../routes/day.routes.js"
+import mealRouter from "../routes/meal.routes.js"
+import foodRouter from "../routes/food.routes.js"
 
 
-//middleware
+//Middleware
 import notFoundMiddleware from "../middleware/not-found.js"
 import errorHandlerMiddleware from "../middleware/error-handler.js"
 import authenticateUser from "../middleware/authentication.js"
@@ -21,7 +21,7 @@ dotenv.config()
 
 const app = express()
 
-//routes
+//Routes
 app.use(cors())
 app.use(express.json())
 
@@ -50,5 +50,5 @@ const start = async () => {
 
 start().catch((error) => {
     console.error("Failed to start application:", error)
-    process.exit(1) // Exit with error code
+    process.exit(1)
 })
