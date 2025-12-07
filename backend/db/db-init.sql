@@ -18,9 +18,9 @@ CREATE TABLE IF NOT EXISTS foods (
     name VARCHAR(100) NOT NULL,
     brand VARCHAR(100) NOT NULL,
     calories NUMERIC NOT NULL, -- per serving
-    protein NUMERIC DEFAULT 0,
-    carbs NUMERIC DEFAULT 0,
-    fat NUMERIC DEFAULT 0,
+    protein NUMERIC NOT NULL,
+    carbs NUMERIC NOT NULL,
+    fat NUMERIC NOT NULL,
     serving_unit VARCHAR(50) -- e.g. 'grams', 'slice'
     );
 
