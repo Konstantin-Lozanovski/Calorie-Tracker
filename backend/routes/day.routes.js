@@ -1,4 +1,3 @@
-// backend/routes/day.routes.js
 import express from "express"
 import {
   getDay,

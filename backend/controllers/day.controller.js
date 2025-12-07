@@ -1,4 +1,3 @@
-// backend/controllers/day.controller.js
 import { pool } from "../src/db.js"
 import {BadRequestError} from "../errors/index.js";
 

@@ -1,8 +1,6 @@
 // backend/routes/meal.routes.js
 import express from "express"
 import {
-    deleteMeal,
-    getEntries,
     addEntry,
     updateEntry,
     deleteEntry,
