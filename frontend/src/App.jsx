@@ -4,6 +4,7 @@ import Signup from "./pages/Signup"
 import Login from "./pages/Login"
 import Dashboard from "./pages/Dashboard"
 import Day from "./pages/Day"
+import FoodEntryPage from "./pages/FoodEntryPage"
 import ProtectedRoute from "./components/ProtectedRoute"
 import {useEffect, useState} from "react"
 import {getUserFromLocalStorage} from "./services/auth"
@@ -42,6 +43,14 @@ function App() {
             element={
               <ProtectedRoute user={user}>
                 <Day user={user} setUser={setUser}/>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/day/:date/meal/:mealId/food/:foodId"
+            element={
+              <ProtectedRoute user={user}>
+                <FoodEntryPage user={user} setUser={setUser}/>
               </ProtectedRoute>
             }
           />
