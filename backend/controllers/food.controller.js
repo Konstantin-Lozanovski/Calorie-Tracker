@@ -1,5 +1,5 @@
 import { pool } from "../src/db.js"
-import {BadRequestError} from "../errors/index.js";
+import {BadRequestError, NotFoundError} from "../errors/index.js";
 
 export const searchFoods = async (req, res) => {
     const { search } = req.query
@@ -41,4 +41,19 @@ export const createFood = async (req, res) => {
 
     res.status(201).json(result.rows[0])
 
+}
+
+export const getFood = async (req, res) => {
+  const {foodId} = req.params
+
+  if(!foodId) throw new BadRequestError("Please provide a food id")
+
+  const result = await pool.query(
+    `SELECT * FROM foods WHERE id = $1`,
+    [foodId]
+  )
+
+  if(result.rowCount === 0) throw new NotFoundError("Food not found")
+
+  res.status(200).json(result.rows[0])
 }
