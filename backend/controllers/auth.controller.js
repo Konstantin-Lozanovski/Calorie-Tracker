@@ -4,31 +4,42 @@ import jwt from "jsonwebtoken"
 import { BadRequestError, UnauthenticatedError, ConflictError } from "../errors/index.js"
 
 export const register = async (req, res) => {
-    const { username, password } = req.body
-    if ( !username || !password) {
-        throw new BadRequestError("Please provide username and password")
+    let { username, password, email } = req.body
+    if ( !username || !password || !email) {
+        throw new BadRequestError("Please provide username, email and password")
     }
 
+    username = username.trim();
+    email = email.trim().toLowerCase();
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+        throw new BadRequestError("Please provide a valid email");
+    }
+
+
     const { rows: existing } = await pool.query(
-        "SELECT 1 FROM users WHERE username = $1",
-        [username]
-    )
+        "SELECT username, email FROM users WHERE username = $1 OR email = $2",
+        [username, email]
+    );
+
     if (existing.length > 0) {
-        throw new ConflictError("Username already exists")
+        throw new ConflictError("Account already exists");
     }
 
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(password, salt)
 
     const { rows } = await pool.query(
-        "INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id, username",
-        [username, hashedPassword]
+        "INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING id, username, email",
+        [username, email, hashedPassword]
     )
     const user = rows[0]
 
     const token = jwt.sign(
         {
-            id: user.id, // whichever exists
+            id: user.id,
             username: user.username,
         },
         process.env.JWT_SECRET,
@@ -41,6 +52,7 @@ export const register = async (req, res) => {
         user: {
             id: user.id,
             username: user.username,
+            email: user.email
         },
         token,
     })

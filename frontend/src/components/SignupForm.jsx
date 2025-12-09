@@ -3,22 +3,30 @@ import { Link } from "react-router-dom"
 import "../css/auth.css"
 
 function SignupForm({ handleSignup }) {
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
 
-  const onSubmit = (e) => {
+    const onSubmit = (e) => {
     e.preventDefault()
     if (password !== confirmPassword) {
       alert("Passwords do not match!")
       return
     }
     handleSignup({ name, username, password })
-  }
+    }
 
-  return (
+    return (
     <form onSubmit={onSubmit}>
       <h2>Register</h2>
+        <input
+            type='email'
+            placeholder='email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+        />
       <input
         type='text'
         placeholder='username'
@@ -48,7 +56,7 @@ function SignupForm({ handleSignup }) {
         </p>
       </div>
     </form>
-  )
+    )
 }
 
 export default SignupForm
