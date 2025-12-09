@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import SignupForm from "../components/SignupForm"
-import "../css/auth.css"
 import { signUp } from "../services/auth"
 
 function Signup({ user, setUser }) {
@@ -17,7 +16,6 @@ function Signup({ user, setUser }) {
   const handleSignup = async (formData) => {
     try {
       const res = await signUp(formData)
-      console.log(res)
       setUser(res.user)
       navigate("/")
     } catch (error) {

@@ -40,7 +40,6 @@ export const register = async (req, res) => {
     const token = jwt.sign(
         {
             id: user.id,
-            username: user.username,
         },
         process.env.JWT_SECRET,
         { expiresIn: process.env.JWT_LIFETIME }
@@ -59,13 +58,15 @@ export const register = async (req, res) => {
 }
 
 export const login = async (req, res) => {
-    const { username, password } = req.body
-    if (!username || !password) {
-        throw new BadRequestError("Please provide username and password")
+    let { email, password } = req.body
+    if (!email || !password) {
+        throw new BadRequestError("Please provide email and password")
     }
 
-    const { rows } = await pool.query("SELECT * FROM users WHERE username = $1", [
-        username,
+    email = email.trim().toLowerCase();
+
+    const { rows } = await pool.query("SELECT * FROM users WHERE email = $1", [
+        email,
     ])
     if (rows.length === 0) throw new UnauthenticatedError("Invalid credentials")
 
@@ -76,7 +77,6 @@ export const login = async (req, res) => {
     const token = jwt.sign(
         {
             id: user.id,
-            username: user.username,
         },
         process.env.JWT_SECRET,
         { expiresIn: process.env.JWT_LIFETIME }
@@ -88,6 +88,7 @@ export const login = async (req, res) => {
         user: {
             id: user.id,
             username: user.username,
+            email: user.email,
             calorie_goal: user.calorie_goal,
             protein_goal_pct: user.protein_goal_pct,
             carbs_goal_pct: user.carbs_goal_pct,
