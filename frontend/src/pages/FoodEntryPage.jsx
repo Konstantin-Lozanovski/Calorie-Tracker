@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {fetchFood} from "../services/api.js";
+import {useNavigate} from 'react-router-dom';
+import {fetchFood, addEntry} from "../services/api.js";
 
 export default function FoodEntryPage() {
   const { date, mealId, foodId } = useParams();
@@ -9,6 +10,8 @@ export default function FoodEntryPage() {
   const [quantity, setQuantity] = useState("100");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   // Fetch the specific food entry
   useEffect(() => {
@@ -28,7 +31,12 @@ export default function FoodEntryPage() {
   }, [date, mealId, foodId]);
 
   const handleAdd = async () => {
-
+    try{
+      const data = await addEntry(mealId, foodId, quantity);
+      navigate(`/day/${date}`)
+    }catch(error) {
+      setError(error.msg || "Failed to add entry");
+    }
   };
 
   if (loading) return <p>Loading...</p>;
