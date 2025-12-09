@@ -32,7 +32,9 @@ export const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt)
 
     const { rows } = await pool.query(
-        "INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING id, username, email",
+        `INSERT INTO users (username, email, password) 
+        VALUES ($1, $2, $3) 
+        RETURNING id, username, email, calorie_goal, protein_goal_pct, carbs_goal_pct, fat_goal_pct, weight_goal`,
         [username, email, hashedPassword]
     )
     const user = rows[0]
@@ -51,7 +53,12 @@ export const register = async (req, res) => {
         user: {
             id: user.id,
             username: user.username,
-            email: user.email
+            email: user.email,
+            calorie_goal: user.calorie_goal,
+            protein_goal_pct: user.protein_goal_pct,
+            carbs_goal_pct: user.carbs_goal_pct,
+            fat_goal_pct: user.fat_goal_pct,
+            weight_goal: user.weight_goal
         },
         token,
     })
@@ -92,7 +99,8 @@ export const login = async (req, res) => {
             calorie_goal: user.calorie_goal,
             protein_goal_pct: user.protein_goal_pct,
             carbs_goal_pct: user.carbs_goal_pct,
-            fat_goal_pct: user.fat_goal_pct
+            fat_goal_pct: user.fat_goal_pct,
+            weight_goal: user.weight_goal
         },
         token,
     })
