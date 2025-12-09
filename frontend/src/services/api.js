@@ -26,3 +26,13 @@ export const fetchFood = async (foodId) => {
     throw error.response?.msg || error.message || "Failed fetching food"
   }
 }
+
+export const addEntry = async (mealId, foodId, quantity) => {
+  try{
+    const response = await axiosInstance.post(`/api/meals/${mealId}/entries`, {foodId, quantity});
+    console.log("Added entries to meals")
+    return response.data
+  }catch(error){
+    throw error.response?.msg || error.message || "Failed adding entry"
+  }
+}
