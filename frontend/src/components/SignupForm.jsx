@@ -14,7 +14,7 @@ function SignupForm({ handleSignup }) {
       alert("Passwords do not match!")
       return
     }
-    handleSignup({ name, username, password })
+    handleSignup({ email, username, password })
     }
 
     return (
