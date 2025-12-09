@@ -27,11 +27,10 @@ app.use(express.json())
 
 app.use("/api/auth", authRouter)
 
-app.use(authenticateUser)
-app.use("/api/user", userRouter)
-app.use("/api/days", dayRouter)
-app.use("/api/meals", mealRouter)
-app.use("/api/foods", foodRouter)
+app.use("/api/user", authenticateUser, userRouter)
+app.use("/api/days", authenticateUser, dayRouter)
+app.use("/api/meals", authenticateUser, mealRouter)
+app.use("/api/foods", authenticateUser, foodRouter)
 
 //
 app.use(notFoundMiddleware)
