@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import {useState, useEffect} from "react";
 import { fetchDay} from "../services/api.js";
+import "../css/Day.css";
 
 const Day = ({ user }) => {
     const { date } = useParams(); // date is the string from URL
@@ -39,7 +40,7 @@ const Day = ({ user }) => {
                         <ul>
                             {meal.entries.map(entry => (
                                 <li key={entry.id}>
-                                    {entry.quantity} {entry.food.unit} {entry.food.name} - {entry.food.calories} cal
+                                    {entry.quantity} {entry.food.unit} {entry.food.name} - {entry.quantity * entry.food.calories / 100} cal
                                 </li>
                             ))}
                         </ul>
