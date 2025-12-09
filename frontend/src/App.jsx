@@ -3,6 +3,7 @@ import Header from "./components/Header"
 import Signup from "./pages/Signup"
 import Login from "./pages/Login"
 import Dashboard from "./pages/Dashboard"
+import Day from "./pages/Day"
 import ProtectedRoute from "./components/ProtectedRoute"
 import { useEffect, useState } from "react"
 import { getUserFromLocalStorage } from "./services/auth"
@@ -33,6 +34,14 @@ function App() {
                         element={
                             <ProtectedRoute user={user} >
                                 <Dashboard user={user} setUser={setUser} />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/day/:date"
+                        element={
+                            <ProtectedRoute user={user} >
+                                <Day user={user} setUser={setUser} />
                             </ProtectedRoute>
                         }
                     />
