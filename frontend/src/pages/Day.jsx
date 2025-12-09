@@ -1,7 +1,7 @@
 import {useParams} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 import {useState, useEffect} from "react";
-import {fetchDay, searchFoods} from "../services/api.js";
+import {fetchDay, searchFoods, addEntry} from "../services/api.js";
 import "../css/Day.css";
 
 const Day = ({user}) => {
@@ -56,6 +56,27 @@ const Day = ({user}) => {
     navigate(`/day/${date}/meal/${meal.id}/food/${food.id}`);
   }
 
+  const handleAddFood = async (mealId, foodId) => {
+    try {
+      await addEntry(mealId, foodId, 100);
+
+      // 1. Refresh day log
+      const updatedDay = await fetchDay(date);
+      setDayLog(updatedDay);
+
+      // 2. Close the add-food panel
+      setActiveMealId(null);
+
+      // 3. Optionally reset search
+      setSearchQuery("");
+      setSearchResults([]);
+      setTab("search");
+    } catch (error) {
+      setError(error.msg || "Failed to add food");
+    }
+  };
+
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
@@ -103,7 +124,7 @@ const Day = ({user}) => {
                     {searchResults.map(food => (
                       <li key={food.id}>
                         {food.name} - {food.calories} cal
-                        <button onClick={() => handleAddFood(meal.id, food)}>Add</button>
+                        <button onClick={() => handleAddFood(meal.id, food.id)}>Add</button>
                         <button onClick={() => handleViewFood(meal, food)}>View</button>
                       </li>
                     ))}
