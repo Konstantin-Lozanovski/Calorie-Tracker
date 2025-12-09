@@ -24,6 +24,7 @@
 .day-card.red {
     background: #f7cfcf;
 }
+
 .day-card-header {
     display: flex;
     flex-direction: column;

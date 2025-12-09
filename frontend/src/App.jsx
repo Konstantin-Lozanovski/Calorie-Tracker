@@ -1,56 +1,56 @@
-import { Routes, Route } from "react-router-dom"
+import {Routes, Route} from "react-router-dom"
 import Header from "./components/Header"
 import Signup from "./pages/Signup"
 import Login from "./pages/Login"
 import Dashboard from "./pages/Dashboard"
 import Day from "./pages/Day"
 import ProtectedRoute from "./components/ProtectedRoute"
-import { useEffect, useState } from "react"
-import { getUserFromLocalStorage } from "./services/auth"
+import {useEffect, useState} from "react"
+import {getUserFromLocalStorage} from "./services/auth"
 
 function App() {
-    const [user, setUser] = useState(null)
-    const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(true)
 
-    useEffect(() => {
-        const storedUser = getUserFromLocalStorage() || null
-        if (storedUser) {
-            setUser(storedUser)
-        }
-        setLoading(false)
-    }, [])
-
-    if (loading) {
-        return <div>Loading...</div>
+  useEffect(() => {
+    const storedUser = getUserFromLocalStorage() || null
+    if (storedUser) {
+      setUser(storedUser)
     }
+    setLoading(false)
+  }, [])
 
-    return (
-        <>
-            <Header user={user} setUser={setUser} />
-            <main className='main-content'>
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <ProtectedRoute user={user} >
-                                <Dashboard user={user} setUser={setUser} />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/day/:date"
-                        element={
-                            <ProtectedRoute user={user} >
-                                <Day user={user} setUser={setUser} />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route path='/signup' element={<Signup user={user} setUser={setUser} />} />
-                    <Route path='/login' element={<Login user={user} setUser={setUser} />} />
-                </Routes>
-            </main>
-        </>
-    )
+  if (loading) {
+    return <div>Loading...</div>
+  }
+
+  return (
+    <>
+      <Header user={user} setUser={setUser}/>
+      <main className='main-content'>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute user={user}>
+                <Dashboard user={user} setUser={setUser}/>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/day/:date"
+            element={
+              <ProtectedRoute user={user}>
+                <Day user={user} setUser={setUser}/>
+              </ProtectedRoute>
+            }
+          />
+          <Route path='/signup' element={<Signup user={user} setUser={setUser}/>}/>
+          <Route path='/login' element={<Login user={user} setUser={setUser}/>}/>
+        </Routes>
+      </main>
+    </>
+  )
 }
 
 export default App

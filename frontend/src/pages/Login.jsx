@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react"
+import {useState, useEffect} from "react"
 import LoginForm from "../components/LoginForm"
-import { useNavigate } from "react-router-dom"
-import { login } from "../services/auth"
+import {useNavigate} from "react-router-dom"
+import {login} from "../services/auth"
 
-const LoginPage = ({ user, setUser }) => {
+const LoginPage = ({user, setUser}) => {
   const [error, setError] = useState(null)
   const navigate = useNavigate()
 
   useEffect(() => {
     if (user) {
-      navigate("/", { replace: true })
+      navigate("/", {replace: true})
     }
   }, [user, navigate])
 
@@ -26,8 +26,8 @@ const LoginPage = ({ user, setUser }) => {
 
   return (
     <div className='auth-container'>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <LoginForm onSubmit={handleLogin} />
+      {error && <p style={{color: "red"}}>{error}</p>}
+      <LoginForm onSubmit={handleLogin}/>
     </div>
   )
 }

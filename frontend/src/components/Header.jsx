@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom"
-import { useNavigate } from "react-router-dom"
+import {Link} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import "../css/Header.css"
 
-function Header({ user, setUser }) {
+function Header({user, setUser}) {
   const navigate = useNavigate()
   const logout = () => {
     localStorage.removeItem("token")

@@ -1,25 +1,25 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import {useState} from "react"
+import {Link} from "react-router-dom"
 
-const LoginForm = ({ onSubmit }) => {
-    const [password, setPassword] = useState("")
-    const [email, setEmail] = useState("")
+const LoginForm = ({onSubmit}) => {
+  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("")
 
-    const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    onSubmit({ email, password })
-    }
+    onSubmit({email, password})
+  }
 
-    return (
+  return (
     <form onSubmit={handleSubmit} className='login-form'>
       <h2>Login</h2>
-        <input
-            type='email'
-            placeholder='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-        />
+      <input
+        type='email'
+        placeholder='email'
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
       <input
         type='password'
         placeholder='Password'
@@ -34,7 +34,7 @@ const LoginForm = ({ onSubmit }) => {
         </p>
       </div>
     </form>
-    )
+  )
 }
 
 export default LoginForm

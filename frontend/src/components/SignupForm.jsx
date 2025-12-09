@@ -20,13 +20,13 @@ function SignupForm({ handleSignup }) {
     return (
     <form onSubmit={onSubmit}>
       <h2>Register</h2>
-        <input
-            type='email'
-            placeholder='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-        />
+      <input
+        type='email'
+        placeholder='email'
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
       <input
         type='text'
         placeholder='username'

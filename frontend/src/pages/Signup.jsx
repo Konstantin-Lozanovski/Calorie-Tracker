@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import {useState, useEffect} from "react"
+import {useNavigate} from "react-router-dom"
 import SignupForm from "../components/SignupForm"
-import { signUp } from "../services/auth"
+import {signUp} from "../services/auth"
 
-function Signup({ user, setUser }) {
+function Signup({user, setUser}) {
   const [error, setError] = useState(null)
   const navigate = useNavigate()
 
   useEffect(() => {
     if (user) {
-      navigate("/", { replace: true })
+      navigate("/", {replace: true})
     }
   }, [user])
 
@@ -26,8 +26,8 @@ function Signup({ user, setUser }) {
 
   return (
     <div className='auth-container'>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <SignupForm handleSignup={handleSignup} />
+      {error && <p style={{color: "red"}}>{error}</p>}
+      <SignupForm handleSignup={handleSignup}/>
     </div>
   )
 }
