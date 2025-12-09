@@ -9,9 +9,10 @@ export const getDay = async (req, res) => {
 
     // 1. Check if log exists, if not create it
     let logResult = await pool.query(
-        "SELECT * FROM daily_logs WHERE user_id = $1 AND date = $2",
+        "SELECT id, user_id, date::text, weight FROM daily_logs WHERE user_id = $1 AND date = $2",
         [userId, date]
     )
+
 
     if (logResult.rows.length === 0) {
         // Create Log
