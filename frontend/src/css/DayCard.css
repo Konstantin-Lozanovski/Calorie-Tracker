@@ -1,0 +1,41 @@
+.day-card {
+    background-color: darkgray;
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    height: 100px;
+}
+
+.day-card:hover {
+    transform: translateY(-3px);
+}
+
+.day-card.disabled {
+    background-color: gray;
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.day-card.green {
+    background: #cff7cf;
+}
+
+.day-card.red {
+    background: #f7cfcf;
+}
+.day-card-header {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.day-name {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.day-date {
+    font-size: 18px;
+}
