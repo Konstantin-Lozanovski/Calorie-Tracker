@@ -1,6 +1,7 @@
 import {useParams} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 import {useState, useEffect} from "react";
+import { useMemo } from "react";
 import {fetchDay, searchFoods, addEntry} from "../services/api.js";
 import "../css/Day.css";
 
@@ -16,6 +17,34 @@ const Day = ({user}) => {
   const [searchResults, setSearchResults] = useState([]);
 
   const navigate = useNavigate();
+
+
+  const totals = useMemo(() => {
+    let calories = 0;
+    let protein = 0;
+    let carbs = 0;
+    let fat = 0;
+
+    if (!dayLog.meals) return { calories, protein, carbs, fat };
+
+    dayLog.meals.forEach(meal => {
+      meal.entries.forEach(entry => {
+        const factor = entry.quantity / 100;
+        calories += entry.food.calories * factor;
+        protein += entry.food.protein * factor;
+        carbs += entry.food.carbs * factor;
+        fat += entry.food.fat * factor;
+      });
+    });
+
+    return {
+      calories: calories.toFixed(0),
+      protein: protein.toFixed(1),
+      carbs: carbs.toFixed(1),
+      fat: fat.toFixed(1)
+    };
+  }, [dayLog]);
+
 
 
   useEffect(() => {
@@ -85,6 +114,11 @@ const Day = ({user}) => {
   return (
     <div>
       <h1>Daily Log: {dayLog.date}</h1>
+      <h3>Totals</h3>
+      <p>Calories: {totals.calories} kcal</p>
+      <p>Protein: {totals.protein} g</p>
+      <p>Carbs: {totals.carbs} g</p>
+      <p>Fat: {totals.fat} g</p>
       {dayLog.meals.map(meal => (
         <div key={meal.id} className="meal">
           <h2>{meal.name}</h2>
@@ -93,7 +127,7 @@ const Day = ({user}) => {
             <ul>
               {meal.entries.map(entry => (
                 <li key={entry.id}>
-                  {entry.quantity} {entry.food.unit} {entry.food.name} - {(entry.quantity * entry.food.calories / 100).toFixed(1)} cal
+                  {entry.quantity} {entry.food.serving_unit}s {entry.food.name} - {(entry.quantity * entry.food.calories / 100).toFixed(1)} cal
                 </li>
               ))}
             </ul>

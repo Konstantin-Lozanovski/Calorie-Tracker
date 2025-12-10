@@ -87,7 +87,7 @@ export const getDay = async (req, res) => {
                     protein: Number(row.protein),
                     carbs: Number(row.carbs),
                     fat: Number(row.fat),
-                    unit: row.serving_unit
+                    serving_unit: row.serving_unit
                 }
             })
         }
