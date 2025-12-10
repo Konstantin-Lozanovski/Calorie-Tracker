@@ -115,6 +115,7 @@ const Day = ({user}) => {
     <div>
       <h1>Daily Log: {dayLog.date}</h1>
       <h3>Totals</h3>
+      <h1>GOAL:{user.calorie_goal}</h1>
       <p>Calories: {totals.calories} kcal</p>
       <p>Protein: {totals.protein} g</p>
       <p>Carbs: {totals.carbs} g</p>
