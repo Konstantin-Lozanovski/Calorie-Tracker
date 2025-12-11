@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import {useNavigate} from 'react-router-dom';
 import {fetchFood, addEntry} from "../services/api.js";
 
-export default function FoodEntryPage() {
+export default function FoodEntry() {
   const { date, mealId, foodId } = useParams();
 
   const [food, setFood] = useState(null);
