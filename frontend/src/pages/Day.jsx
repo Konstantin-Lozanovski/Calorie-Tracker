@@ -107,7 +107,7 @@ const Day = ({user}) => {
 
               ) : <p>No entries yet</p>}
 
-              <button onClick={() => navigate(`/day/${date}/meal/${meal.id}/food/${food.id}`)}>
+              <button onClick={() => navigate(`/day/${date}/meal/${meal.id}/add`)}>
                 Add Food
               </button>
             </div>
