@@ -1,0 +1,69 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    background-color: #3c3c87;
+    height: 100vh;
+}
+
+.meals-container {
+    display: flex;
+    gap: 20px;
+}
+
+.meal{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    width: 300px;
+    background-color: #f7cfcf;
+    border-radius: 10px;
+}
+
+.macros-container{
+    display: flex;
+    gap: 50px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.entries {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.entry-row {
+    display: flex;
+    justify-content: space-between;
+    background: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.entry-name {
+    font-weight: 600;
+}
+
+.entry-details {
+    color: #444;
+    text-align: left;
+}
+
+.entry-calories {
+    font-weight: 600;
+    text-align: right;
+}
+
+.meal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
