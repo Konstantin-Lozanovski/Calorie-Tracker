@@ -92,7 +92,7 @@ const Day = ({user}) => {
 
                 <div className="entries">
                   {meal.entries.map(entry => (
-                    <div key={entry.id} className="entry-row">
+                    <div key={entry.id} className="entry-row" onClick={() => navigate(`/day/${date}/meal/${meal.id}/entry/${entry.id}`)}>
                       <span className="entry-name">{entry.food.name}</span>
                       <span
                         className="entry-details">{entry.food.brand} — {entry.quantity}{entry.food.serving_unit}</span>
