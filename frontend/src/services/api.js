@@ -63,3 +63,12 @@ export const fetchMeal = async (mealId) => {
     throw error.response?.msg || error.message || "Failed fetching meal"
   }
 }
+
+export const deleteEntry = async (entryId) => {
+  try{
+    const response = await axiosInstance.delete(`/api/meals/entries/${entryId}`);
+    return response.data
+  }catch (error) {
+    throw error.response?.msg || error.message || "Failed deleting entry"
+  }
+}
