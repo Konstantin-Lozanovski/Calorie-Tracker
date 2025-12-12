@@ -16,6 +16,11 @@ export default function Profile({ user, setUser }) {
 
   const navigate = useNavigate();
 
+  const proteinGrams = Math.round((form.calorieGoal * (form.proteinGoalPct / 100)) / 4);
+  const carbsGrams = Math.round((form.calorieGoal * (form.carbsGoalPct / 100)) / 4);
+  const fatGrams = Math.round((form.calorieGoal * (form.fatGoalPct / 100)) / 9);
+
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -76,6 +81,7 @@ export default function Profile({ user, setUser }) {
                 value={form.proteinGoalPct}
                 onChange={handleChange}
               />
+              <span className="macro-grams">{proteinGrams}g</span>
             </div>
 
             <div className="input-group">
@@ -86,6 +92,7 @@ export default function Profile({ user, setUser }) {
                 value={form.carbsGoalPct}
                 onChange={handleChange}
               />
+              <span className="macro-grams">{carbsGrams}g</span>
             </div>
 
             <div className="input-group">
@@ -96,6 +103,7 @@ export default function Profile({ user, setUser }) {
                 value={form.fatGoalPct}
                 onChange={handleChange}
               />
+              <span className="macro-grams">{fatGrams}g</span>
             </div>
           </div>
 
