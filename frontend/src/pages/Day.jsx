@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {useState, useEffect} from "react";
 import {useMemo} from "react";
 import {fetchDay, searchFoods, addEntry} from "../services/api.js";
+import MacroProgress from "../components/MacroProgress";
 import "../css/Day.css";
 
 const Day = ({user}) => {
@@ -62,18 +63,40 @@ const Day = ({user}) => {
 
   return (
     <div className="container">
-      <h1>Daily Log: {dayLog.date}</h1>
-      <h3>Totals</h3>
-      <h1>GOAL:{user.calorie_goal}</h1>
-      <p>Calories: {totals.calories} kcal</p>
-      <div className="macros-container">
-        <p>Protein: {totals.protein} / {user.protein_goal_pct} g</p>
-        <p>Carbs: {totals.carbs} / {user.carbs_goal_pct} g</p>
-        <p>Fat: {totals.fat} / {user.fat_goal_pct} g</p>
+      <div className="day-header">
+        <div className="day-title">
+          <h1>Daily Log</h1>
+          <span className="day-date">{dayLog.date}</span>
+        </div>
+
+        <div className="totals-card">
+          <div className="total-row">
+            <span className="total-label">Calories</span>
+            <span className="total-value">{totals.calories} / {user.calorie_goal}</span>
+          </div>
+
+          <div className="macros-row">
+            <MacroProgress
+              label="Protein"
+              current={totals.protein}
+              goal={user.protein_goal_pct}
+              color="#8e44ad"
+            />
+            <MacroProgress
+              label="Carbs"
+              current={totals.carbs}
+              goal={user.carbs_goal_pct}
+              color="#e67e22"
+            />
+            <MacroProgress
+              label="Fat"
+              current={totals.fat}
+              goal={user.fat_goal_pct}
+              color="#27ae60"
+            />
+          </div>
+        </div>
       </div>
-
-      <h2>Meals</h2>
-
       <div className="meals-container">
 
         {dayLog.meals.map(meal => {
