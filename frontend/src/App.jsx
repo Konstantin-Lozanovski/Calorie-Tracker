@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard"
 import Day from "./pages/Day"
 import FoodEntry from "./pages/FoodEntry"
 import AddFood from "./pages/AddFood"
+import Profile from "./pages/Profile"
 import ProtectedRoute from "./components/ProtectedRoute"
 import {useEffect, useState} from "react"
 import {getUserFromLocalStorage} from "./services/auth"
@@ -68,6 +69,14 @@ function App() {
             element={
               <ProtectedRoute user={user}>
                 <AddFood user={user} setUser={setUser}/>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute user={user}>
+                <Profile user={user} setUser={setUser}/>
               </ProtectedRoute>
             }
           />

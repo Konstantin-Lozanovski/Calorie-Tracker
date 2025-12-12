@@ -21,7 +21,7 @@ function Header({user, setUser}) {
       <div></div>
       {user ? (
         <div className='header-user'>
-          <Link className='header-name'>@ {user.username}</Link>
+          <Link className='header-name' to="/profile">@ {user.username}</Link>
           <button className='header-logout-button' onClick={logout}>
             Log out
           </button>
