@@ -56,6 +56,17 @@ const Day = ({user}) => {
     getDay()
   }, [date, user.id])
 
+  const formattedDate = useMemo(() => {
+    if (!dayLog.date) return "";
+    const d = new Date(dayLog.date);
+    return d.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric"
+    }); // e.g. Dec 10, 2025
+  }, [dayLog.date]);
+
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
@@ -66,7 +77,7 @@ const Day = ({user}) => {
       <div className="day-header">
         <div className="day-title">
           <h1>Daily Log</h1>
-          <span className="day-date">{dayLog.date}</span>
+          <span className="day-date-badge">{formattedDate}</span>
         </div>
 
         <div className="totals-card">
@@ -120,7 +131,7 @@ const Day = ({user}) => {
                       <span
                         className="entry-details">{entry.food.brand} — {entry.quantity}{entry.food.serving_unit}</span>
                       <span className="entry-calories">
-                      {(entry.quantity * entry.food.calories / 100).toFixed(1)} cal
+                      {(entry.quantity * entry.food.calories / 100).toFixed(0)} cal
                     </span>
                     </div>
 
