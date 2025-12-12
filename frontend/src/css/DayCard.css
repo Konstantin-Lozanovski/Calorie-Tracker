@@ -1,42 +1,60 @@
 .day-card {
-    background-color: darkgray;
-    padding: 15px;
-    border-radius: 10px;
+    background: var(--color-card-bg);
+    padding: 16px;
+    border-radius: var(--radius-lg);
     cursor: pointer;
-    transition: 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: var(--shadow-md);
 }
 
 .day-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--shadow-lg);
 }
 
+/* Disabled days (past/future, non-editable) */
 .day-card.disabled {
     background-color: gray;
-    opacity: 0.4;
+    opacity: 0.5;
     pointer-events: none;
 }
 
+/* Status colors (optional for highlighting completed / missed) */
 .day-card.green {
-    background: #cff7cf;
+    border: 2px solid #27ae60; /* green border */
 }
 
 .day-card.red {
-    background: #f7cfcf;
+    border: 2px solid #e74c3c; /* red border */
+    background: var(--color-card-bg); /* keep neutral background */
 }
 
+
+/* Card Header */
 .day-card-header {
     display: flex;
     flex-direction: column;
+    gap: 2px;
     font-weight: 600;
-    margin-bottom: 6px;
 }
 
 .day-name {
     font-size: 14px;
+    color: var(--color-text-dark);
     opacity: 0.8;
 }
 
 .day-date {
     font-size: 18px;
+    color: var(--color-text-dark);
+    font-weight: 700;
+}
+
+/* Optional: highlight current day */
+.day-card.today {
+    border: 2px solid var(--color-primary);
 }
