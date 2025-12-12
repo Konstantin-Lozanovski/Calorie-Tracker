@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { searchFoods, addEntry } from "../services/api";
+import {useState, useEffect} from "react";
+import {useParams, useNavigate} from "react-router-dom";
+import {searchFoods, addEntry} from "../services/api";
 import "../css/AddFood.css";
 
 const AddFood = () => {
-  const { date, mealId } = useParams();
+  const {date, mealId} = useParams();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [error, setError] = useState(null);
@@ -42,6 +42,10 @@ const AddFood = () => {
     }
   };
 
+  const handleView = (foodId) => {
+    navigate(`/day/${date}/meal/${mealId}/food/${foodId}`);
+  }
+
   return (
     <div className="add-food-container">
       <h1>Add Food</h1>
@@ -57,14 +61,17 @@ const AddFood = () => {
 
       <div className="food-results">
         {results.map(food => (
-          <div key={food.id} className="food-card">
-            <div>
-              {food.name}{food.brand ? ` — ${food.brand}` : ""} — {food.calories} cal / 100g
+          <div
+            key={food.id}
+            className="food-card"
+            onClick={() => handleView(food.id)}
+          >
+            <div className="food-info">
+              <span className="food-name">{food.name}</span>
+              {food.brand && <span className="food-brand"> — {food.brand}</span>}
+              <div className="food-calories">{food.calories} cal / 100g</div>
             </div>
-            <div>
-              <button onClick={() => handleAdd(food.id)}>Add</button>
-              <button onClick={() => navigate(`/day/${date}/meal/${mealId}/food/${food.id}`)}>View</button>
-            </div>
+            <button onClick={() => handleAdd(food.id)}>Add</button>
           </div>
         ))}
       </div>

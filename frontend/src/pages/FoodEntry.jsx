@@ -67,10 +67,12 @@ export default function FoodEntry() {
     <div className="food-entry-container">
       <h1>{isEditing ? "Edit Entry" : "Add Food"}</h1>
 
-      <div className="food-card">
+      <div className="food-card2">
         <div className="food-info">
           <h2>{food.name}</h2>
           {food.brand && <p className="food-brand">{food.brand}</p>}
+        </div>
+        <div className="food-info">
           {meal && <p className="meal-name">Meal: {meal.meal}</p>}
         </div>
 
