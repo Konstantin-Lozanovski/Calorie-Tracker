@@ -51,6 +51,7 @@ export const getDay = async (req, res) => {
             me.quantity,
             f.id as food_id,
             f.name as food_name,
+            f.brand as brand_name,
             f.calories,
             f.protein,
             f.carbs,
@@ -83,6 +84,7 @@ export const getDay = async (req, res) => {
                 food: {
                     id: row.food_id,
                     name: row.food_name,
+                    brand: row.brand_name,
                     calories: Number(row.calories),
                     protein: Number(row.protein),
                     carbs: Number(row.carbs),
