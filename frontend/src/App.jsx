@@ -4,7 +4,7 @@ import Signup from "./pages/Signup"
 import Login from "./pages/Login"
 import Dashboard from "./pages/Dashboard"
 import Day from "./pages/Day"
-import FoodEntryPage from "./pages/FoodEntryPage"
+import FoodEntry from "./pages/FoodEntry"
 import AddFood from "./pages/AddFood"
 import ProtectedRoute from "./components/ProtectedRoute"
 import {useEffect, useState} from "react"
@@ -51,7 +51,15 @@ function App() {
             path="/day/:date/meal/:mealId/food/:foodId"
             element={
               <ProtectedRoute user={user}>
-                <FoodEntryPage user={user} setUser={setUser}/>
+                <FoodEntry user={user} setUser={setUser}/>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/day/:date/meal/:mealId/entry/:entryId"
+            element={
+              <ProtectedRoute user={user}>
+                <FoodEntry user={user} setUser={setUser}/>
               </ProtectedRoute>
             }
           />
