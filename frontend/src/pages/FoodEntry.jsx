@@ -110,7 +110,7 @@ export default function FoodEntry() {
         </div>
 
 
-        <button onClick={handleAdd}>{isEditing ? "Update Entry" : "Add Entry"}</button>
+        <button onClick={handleAdd}>{isEditing ? "Update" : "Add"}</button>
       </div>
     </div>
   );
