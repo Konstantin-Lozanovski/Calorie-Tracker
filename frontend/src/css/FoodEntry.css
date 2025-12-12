@@ -1,0 +1,120 @@
+.food-entry-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-height: 100vh;
+    background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-dark) 100%);
+    color: var(--color-text-light);
+}
+
+.food-entry-container h1 {
+    font-size: 32px;
+    text-align: center;
+    margin: 0;
+}
+
+.food-card {
+    background: var(--color-card-bg);
+    color: var(--color-text-dark);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: var(--shadow-md);
+}
+
+.food-info h2 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.food-brand, .meal-name {
+    font-size: 16px;
+    color: #555;
+}
+
+.quantity-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-input label {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--color-text-dark);
+    margin: 0;
+}
+
+.quantity-input input {
+    width: 80px;
+    padding: 6px 10px;
+    font-size: 14px;
+    border-radius: var(--radius-sm);
+    border: 1px solid #ddd;
+    background-color: #f6f6fc; /* visible background */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.quantity-input input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 6px var(--color-primary-light);
+    background-color: #fff;
+}
+
+.macros-row {
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+    margin-top: 12px;
+    font-weight: 600;
+}
+
+.macro-box {
+    flex: 1;
+    background: var(--color-card-bg-alt);
+    border: 1px solid #e3e3e3;
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    text-align: center;
+}
+
+.macro-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 4px;
+}
+
+.macro-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-text-dark);
+}
+
+
+button {
+    background: var(--color-primary);
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+}
+
+button:hover {
+    background: var(--color-primary-light);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}

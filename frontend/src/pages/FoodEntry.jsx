@@ -1,7 +1,8 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {useNavigate} from 'react-router-dom';
-import {fetchFood, addEntry, fetchEntry, updateEntry} from "../services/api.js";
+import {fetchFood, addEntry, fetchEntry, updateEntry, fetchMeal} from "../services/api.js";
+import "../css/FoodEntry.css";
 
 export default function FoodEntry() {
   const {date, mealId, foodId, entryId} = useParams();
@@ -9,50 +10,53 @@ export default function FoodEntry() {
   const isAddingFromSearch = Boolean(foodId && !entryId);
 
   const [food, setFood] = useState(null);
+  const [meal, setMeal] = useState(null);
   const [entry, setEntry] = useState(null);
   const [quantity, setQuantity] = useState("100");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-
   const navigate = useNavigate();
 
-  // Fetch the specific food entry
   useEffect(() => {
-
     const load = async () => {
       try{
         setLoading(true);
+
+        // fetch meal for display
+        const mealData = await fetchMeal(mealId);
+        setMeal(mealData);
+
         if(isEditing) {
           const entryData = await fetchEntry(entryId);
           setEntry(entryData);
           setQuantity(entryData.quantity.toString());
           const foodData = await fetchFood(entryData.food_id)
           setFood(foodData);
-        }else if(isAddingFromSearch){
+        } else if(isAddingFromSearch){
           const foodData = await fetchFood(foodId);
           setFood(foodData);
         }
-      }catch (error) {
-        setError(error.msg || "Failed to fetch entry");
+      } catch (err) {
+        setError(err.msg || "Failed to fetch data");
       } finally {
         setLoading(false);
       }
     }
 
-   load()
+    load()
   }, [date, mealId, foodId, entryId, isEditing, isAddingFromSearch]);
 
   const handleAdd = async () => {
     try {
       if(isEditing){
-        const data = await updateEntry(entry.id, Number(quantity))
-      }else if(isAddingFromSearch){
-        const data = await addEntry(mealId, foodId, Number(quantity));
+        await updateEntry(entry.id, Number(quantity));
+      } else if(isAddingFromSearch){
+        await addEntry(mealId, foodId, Number(quantity));
       }
-      navigate(`/day/${date}`)
-    } catch (error) {
-      setError(error.msg || "Failed to add entry");
+      navigate(`/day/${date}`);
+    } catch (err) {
+      setError(err.msg || "Failed to add entry");
     }
   };
 
@@ -60,30 +64,52 @@ export default function FoodEntry() {
   if (error) return <p>{error}</p>;
 
   return (
-    <div>
-      <h1>Food Entry</h1>
+    <div className="food-entry-container">
+      <h1>{isEditing ? "Edit Entry" : "Add Food"}</h1>
 
-      <p><strong>Name:</strong> {food.name}</p>
-      <p><strong>Brand:</strong> {food.brand}</p>
+      <div className="food-card">
+        <div className="food-info">
+          <h2>{food.name}</h2>
+          {food.brand && <p className="food-brand">{food.brand}</p>}
+          {meal && <p className="meal-name">Meal: {meal.meal}</p>}
+        </div>
 
-      <p><strong>Calories:</strong> {(quantity * food.calories / 100).toFixed(0)}</p>
-      <p><strong>Protein:</strong> {(quantity * food.protein / 100).toFixed(0)}</p>
-      <p><strong>Carbs:</strong> {(quantity * food.carbs / 100).toFixed(0)}</p>
-      <p><strong>Fat:</strong> {(quantity * food.fat / 100).toFixed(1)}</p>
+        <div className="quantity-input">
+          <label>
+            Servings:
+            <input
+              type="number"
+              min="0"
+              step="0.1"
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+            />
+          </label>
+        </div>
 
 
-      <label>
-        Quantity:
-        <input
-          type="number"
-          value={quantity}
-          onChange={(e) => setQuantity(e.target.value)}
-        />
-      </label>
+        <div className="macros-row">
+          <div className="macro-box">
+            <span className="macro-label">Calories</span>
+            <span className="macro-value">{(quantity * food.calories / 100).toFixed(0)}</span>
+          </div>
+          <div className="macro-box">
+            <span className="macro-label">Protein</span>
+            <span className="macro-value">{(quantity * food.protein / 100).toFixed(1)}</span>
+          </div>
+          <div className="macro-box">
+            <span className="macro-label">Carbs</span>
+            <span className="macro-value">{(quantity * food.carbs / 100).toFixed(1)}</span>
+          </div>
+          <div className="macro-box">
+            <span className="macro-label">Fat</span>
+            <span className="macro-value">{(quantity * food.fat / 100).toFixed(1)}</span>
+          </div>
+        </div>
 
-      <button onClick={handleAdd} disabled={loading}>{isEditing ? "Update" : "Add"}</button>
 
-
+        <button onClick={handleAdd}>{isEditing ? "Update Entry" : "Add Entry"}</button>
+      </div>
     </div>
   );
 }
