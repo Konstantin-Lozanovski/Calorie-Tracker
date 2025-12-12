@@ -2,66 +2,52 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #1f2937;
-    height: 50px;
-    padding-left: 50px;
-    padding-right: 50px;
+    background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-dark) 100%);
+    padding: 0 24px;
+    height: 60px;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
-    border-bottom: 1px #e5e7eb solid;
-}
-
-.header-links {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.header-link {
-    text-decoration: none;
-    color: white;
-    background-color: #1f2937;
-    padding: 5px;
-    border-radius: 10px;
+    box-shadow: var(--shadow-md);
+    color: var(--color-text-light);
 }
 
 .header-brand a {
     text-decoration: none;
-    color: white;
+    color: var(--color-text-light);
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.header-links, .header-user {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-link, .header-logout-button {
+    background: var(--color-primary);
+    color: var(--color-text-light);
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-link:hover, .header-logout-button:hover {
+    background: var(--color-primary-light);
+    transform: translateY(-1px);
 }
 
 .header-name {
-    color: white;
-    text-decoration: none;
-}
-
-.header-name a {
-    text-decoration: none;
-    color: white;
-}
-
-.header-name a:hover {
-    text-decoration: underline;
-}
-
-.header-user {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    align-items: center;
-}
-
-.header-logout-button {
-    border-radius: 5px;
-    padding: 10px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    border: none;
-    color: white;
-    background-color: #1f2937;
-    cursor: pointer;
+    color: var(--color-text-light);
+    font-weight: 600;
 }
