@@ -1,0 +1,21 @@
+:root {
+    --gap-sm: 8px;
+    --color-bg: #3c3c87;
+    --color-bg-dark: #2c2c65;
+
+    --color-card-bg: #ffffff;
+    --color-card-bg-alt: #f6f6fc;
+
+    --color-text-dark: #222;
+    --color-text-light: #f0f0f0;
+
+    --color-primary: #3c3c87;
+    --color-primary-light: #6b6bd1;
+
+    --radius-lg: 16px;
+    --radius-md: 12px;
+    --radius-sm: 10px;
+
+    --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 6px 15px rgba(0, 0, 0, 0.14);
+}
