@@ -1,15 +1,15 @@
-import { useState } from "react";
+import {useState} from "react";
 import {updateUserGoals} from "../services/api.js";
 import {useNavigate} from "react-router-dom";
 import "../css/Profile.css";
 
-export default function Profile({ user, setUser }) {
+export default function Profile({user, setUser}) {
   const [form, setForm] = useState({
     calorieGoal: user.calorie_goal,
     proteinGoalPct: user.protein_goal_pct,
     carbsGoalPct: user.carbs_goal_pct,
     fatGoalPct: user.fat_goal_pct,
-    weightGoal: user.weight_goal
+    weightGoal: user.weight_goal || ""
   });
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
@@ -22,7 +22,7 @@ export default function Profile({ user, setUser }) {
 
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm({...form, [e.target.name]: e.target.value});
   };
 
   const handleSubmit = async (e) => {
@@ -34,11 +34,11 @@ export default function Profile({ user, setUser }) {
       Number(form.fatGoalPct);
 
     if (totalPct !== 100) {
-      setError({ msg: "Protein, carbs, and fat percentages must add up to 100%" });
+      setError({msg: "Protein, carbs, and fat percentages must add up to 100%"});
       return;
     }
 
-    try{
+    try {
       const data = await updateUserGoals(form)
       setUser(data)
       setSuccess(true)
@@ -46,7 +46,7 @@ export default function Profile({ user, setUser }) {
         setSuccess(false);
         navigate("/");
       }, 2500);
-    }catch (error){
+    } catch (error) {
       setError(error)
       setSuccess(false)
     }
@@ -66,6 +66,15 @@ export default function Profile({ user, setUser }) {
               type="number"
               name="calorieGoal"
               value={form.calorieGoal}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="input-group">
+            <label>Weight Goal (kgs)</label>
+            <input
+              type="number"
+              name="weightGoal"
+              value={form.weightGoal}
               onChange={handleChange}
             />
           </div>
