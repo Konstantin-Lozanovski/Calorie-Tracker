@@ -36,3 +36,21 @@ export const addEntry = async (mealId, foodId, quantity) => {
     throw error.response?.msg || error.message || "Failed adding entry"
   }
 }
+
+export const fetchEntry = async (entryId) => {
+  try{
+    const response = await axiosInstance.get(`/api/meals/entries/${entryId}`);
+    return response.data
+  }catch(error){
+    throw error.response?.msg || error.message || "Failed fetching entry"
+  }
+}
+
+export const updateEntry = async (entryId, quantity) => {
+  try{
+    const response = await axiosInstance.put(`/api/meals/entries/${entryId}`, {quantity});
+    return response.data
+  }catch(error){
+    throw error.response?.msg || error.message || "Failed updating entry"
+  }
+}
