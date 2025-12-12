@@ -104,3 +104,18 @@ export const getEntry = async (req, res) => {
   res.status(200).json(result.rows[0])
 }
 
+export const getMeal = async (req, res) => {
+  const {mealId} = req.params
+
+  if (!mealId) throw new BadRequestError("Please provide a meal id")
+
+  const result = await pool.query(
+    `SELECT * FROM meals WHERE id = $1`,
+    [mealId]
+  )
+
+  if (result.rowCount === 0) throw new NotFoundError("Meal not found")
+
+  res.status(200).json(result.rows[0])
+}
+

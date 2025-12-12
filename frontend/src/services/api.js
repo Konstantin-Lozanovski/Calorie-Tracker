@@ -54,3 +54,12 @@ export const updateEntry = async (entryId, quantity) => {
     throw error.response?.msg || error.message || "Failed updating entry"
   }
 }
+
+export const fetchMeal = async (mealId) => {
+  try{
+    const response = await axiosInstance.get(`/api/meals/${mealId}`);
+    return response.data
+  }catch(error){
+    throw error.response?.msg || error.message || "Failed fetching meal"
+  }
+}
