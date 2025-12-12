@@ -62,6 +62,7 @@ const AddFood = () => {
             <li key={food.id}>
               {food.name} — {food.calories} cal
               <button onClick={() => handleAdd(food.id)}>Add</button>
+              <button onClick={() => navigate(`/day/${date}/meal/${mealId}/food/${food.id}`)}>View</button>
             </li>
           ))}
         </ul>
