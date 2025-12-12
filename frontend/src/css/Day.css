@@ -20,16 +20,6 @@
     --shadow-lg: 0 6px 15px rgba(0, 0, 0, 0.14);
 }
 
-/*.entry-row {*/
-/*    position: relative; !* important for positioning the delete button *!*/
-/*    padding: 12px 16px;*/
-/*    background: var(--color-card-bg-alt);*/
-/*    border-radius: var(--radius-md);*/
-/*    border: 1px solid #b0b0c0;*/
-/*    cursor: pointer;*/
-/*    transition: background 0.15s ease, transform 0.12s ease;*/
-/*}*/
-
 
 .entry-delete {
     position: absolute;
@@ -60,8 +50,6 @@
 
 
 
-
-
 /* Page Layout */
 .container {
     max-width: 1300px;
@@ -83,6 +71,7 @@
     gap: 20px;
     width: 100%;
     margin-top: 20px;
+    align-items: start;
 }
 
 /* Meal Card */

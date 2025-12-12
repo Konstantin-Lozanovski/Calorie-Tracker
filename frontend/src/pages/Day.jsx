@@ -40,6 +40,21 @@ const Day = ({user}) => {
     };
   }, [dayLog]);
 
+  const macroGoals = useMemo(() => {
+    const totalCals = user.calorie_goal;
+
+    const proteinCals = (user.protein_goal_pct / 100) * totalCals;
+    const carbsCals = (user.carbs_goal_pct / 100) * totalCals;
+    const fatCals = (user.fat_goal_pct / 100) * totalCals;
+
+    return {
+      protein: (proteinCals / 4).toFixed(0), // 4 cal per gram
+      carbs: (carbsCals / 4).toFixed(0),     // 4 cal per gram
+      fat: (fatCals / 9).toFixed(0)          // 9 cal per gram
+    };
+  }, [user]);
+
+
   useEffect(() => {
     const getDay = async () => {
       try {
@@ -103,19 +118,19 @@ const Day = ({user}) => {
             <MacroProgress
               label="Protein"
               current={totals.protein}
-              goal={user.protein_goal_pct}
+              goal={macroGoals.protein}
               color="#8e44ad"
             />
             <MacroProgress
               label="Carbs"
               current={totals.carbs}
-              goal={user.carbs_goal_pct}
+              goal={macroGoals.carbs}
               color="#e67e22"
             />
             <MacroProgress
               label="Fat"
               current={totals.fat}
-              goal={user.fat_goal_pct}
+              goal={macroGoals.fat}
               color="#27ae60"
             />
           </div>
