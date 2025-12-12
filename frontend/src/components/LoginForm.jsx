@@ -15,7 +15,7 @@ const LoginForm = ({onSubmit}) => {
       <h2>Login</h2>
       <input
         type='email'
-        placeholder='email'
+        placeholder='Email'
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required

@@ -22,14 +22,14 @@ function SignupForm({ handleSignup }) {
       <h2>Register</h2>
       <input
         type='email'
-        placeholder='email'
+        placeholder='Email'
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
       />
       <input
         type='text'
-        placeholder='username'
+        placeholder='Username'
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         required

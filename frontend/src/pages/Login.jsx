@@ -26,7 +26,7 @@ const LoginPage = ({user, setUser}) => {
 
   return (
     <div className='auth-container'>
-      {error && <p style={{color: "red"}}>{error}</p>}
+      {error && <p>{error}</p>}
       <LoginForm onSubmit={handleLogin}/>
     </div>
   )

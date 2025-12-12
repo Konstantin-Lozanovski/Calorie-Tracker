@@ -26,7 +26,7 @@ function Signup({user, setUser}) {
 
   return (
     <div className='auth-container'>
-      {error && <p style={{color: "red"}}>{error}</p>}
+      {error && <p>{error}</p>}
       <SignupForm handleSignup={handleSignup}/>
     </div>
   )
