@@ -13,7 +13,7 @@ const Dashboard = ({user}) => {
   }, []);
 
   return (
-    <div>
+    <div className="dashboard-container">
       <h1>Welcome, {user.username}</h1>
       <div className="days-grid">
         {days.map((day) => (

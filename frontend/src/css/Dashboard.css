@@ -1,5 +1,26 @@
+/* Dashboard Page Layout */
+.dashboard-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    min-height: 100vh;
+    background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-dark) 100%);
+    color: var(--color-text-light);
+}
+
+h1 {
+    font-size: 32px;
+    margin: 0;
+    text-align: center;
+}
+
+/* Days Grid */
 .days-grid {
     display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7 days per row */
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 16px;
+    width: 100%;
 }
