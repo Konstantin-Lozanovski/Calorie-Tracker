@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { searchFoods, addEntry, fetchDay } from "../services/api";
+import { searchFoods, addEntry } from "../services/api";
+import "../css/AddFood.css";
 
 const AddFood = () => {
   const { date, mealId } = useParams();
@@ -12,7 +13,7 @@ const AddFood = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (query.length === 0) {
+    if (!query) {
       setResults([]);
       return;
     }
@@ -22,8 +23,8 @@ const AddFood = () => {
         setLoading(true);
         const data = await searchFoods(query);
         setResults(data);
-      } catch(error){
-        setError(error.msg || "Failed to search foods");
+      } catch (err) {
+        setError(err.msg || "Failed to search foods");
       } finally {
         setLoading(false);
       }
@@ -34,17 +35,15 @@ const AddFood = () => {
 
   const handleAdd = async (foodId) => {
     try {
-      await addEntry(mealId, foodId, 100);
+      await addEntry(mealId, foodId, 100); // 100g by default
       navigate(`/day/${date}`);
-    } catch (error) {
-      setError(error.msg || "Failed to add food");
+    } catch (err) {
+      setError(err.msg || "Failed to add food");
     }
   };
 
-  if (error) return <div>{error}</div>;
-
   return (
-    <div className="container">
+    <div className="add-food-container">
       <h1>Add Food</h1>
 
       <input
@@ -56,17 +55,19 @@ const AddFood = () => {
 
       {loading && <p>Loading...</p>}
 
-      {results.length > 0 && (
-        <ul>
-          {results.map(food => (
-            <li key={food.id}>
-              {food.name} — {food.calories} cal
+      <div className="food-results">
+        {results.map(food => (
+          <div key={food.id} className="food-card">
+            <div>
+              {food.name}{food.brand ? ` — ${food.brand}` : ""} — {food.calories} cal / 100g
+            </div>
+            <div>
               <button onClick={() => handleAdd(food.id)}>Add</button>
               <button onClick={() => navigate(`/day/${date}/meal/${mealId}/food/${food.id}`)}>View</button>
-            </li>
-          ))}
-        </ul>
-      )}
+            </div>
+          </div>
+        ))}
+      </div>
 
       {error && <p>{error}</p>}
     </div>
