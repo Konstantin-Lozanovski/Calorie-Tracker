@@ -72,3 +72,12 @@ export const deleteEntry = async (entryId) => {
     throw error.response?.msg || error.message || "Failed deleting entry"
   }
 }
+
+export const updateUserGoals = async (goals) => {
+  try{
+    const response = await axiosInstance.put(`/api/user/goals`, goals);
+    return response.data
+  }catch (error) {
+    throw error.response?.msg || error.message || "Failed updating goals"
+  }
+}
