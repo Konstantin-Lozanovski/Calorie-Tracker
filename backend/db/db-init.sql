@@ -5,8 +5,8 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     calorie_goal INTEGER DEFAULT 2000,
-    protein_goal_pct INTEGER DEFAULT 40,
-    carbs_goal_pct INTEGER DEFAULT 40,
+    protein_goal_pct INTEGER DEFAULT 20,
+    carbs_goal_pct INTEGER DEFAULT 60,
     fat_goal_pct INTEGER DEFAULT 20,
     weight_goal NUMERIC DEFAULT NULL,
     -- This line ensures the math is always correct at the database level
