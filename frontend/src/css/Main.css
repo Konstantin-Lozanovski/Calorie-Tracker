@@ -7,6 +7,12 @@
 body {
     font-family: Inter, sans-serif; /* Set a default font */
     line-height: 1.6; /* Improve text readability */
-    margin-top: 50px;
-    background-color: #f4f5f7;
+    min-height: 100vh;
+    background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-dark) 100%);
+    color: var(--color-text-light);
+}
+
+.main-content {
+    padding-top: 60px; /* same as header height */
+    min-height: calc(100vh - 60px); /* ensures it fits viewport */
 }
