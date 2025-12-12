@@ -20,10 +20,44 @@
     --shadow-lg: 0 6px 15px rgba(0, 0, 0, 0.14);
 }
 
-/*.entry-row:not(:last-child) {*/
-/*    border-bottom: 1px solid #ccc;*/
-/*    padding-bottom: 10px;*/
+/*.entry-row {*/
+/*    position: relative; !* important for positioning the delete button *!*/
+/*    padding: 12px 16px;*/
+/*    background: var(--color-card-bg-alt);*/
+/*    border-radius: var(--radius-md);*/
+/*    border: 1px solid #b0b0c0;*/
+/*    cursor: pointer;*/
+/*    transition: background 0.15s ease, transform 0.12s ease;*/
 /*}*/
+
+
+.entry-delete {
+    position: absolute;
+    top: -8px; /* above the card */
+    right: -8px; /* outside the card */
+    width: 22px;
+    height: 22px;
+    background: #e74c3c;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 10; /* make sure it’s above the card */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.entry-delete:hover {
+    background: #c0392b;
+    transform: scale(1.1);
+}
+
 
 
 
@@ -90,6 +124,8 @@
 }
 
 .entry-row {
+    position: relative;
+    overflow: visible;
     display: flex;
     flex-direction: column;
     padding: 10px 14px;

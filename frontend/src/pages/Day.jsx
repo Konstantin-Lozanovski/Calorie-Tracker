@@ -2,7 +2,7 @@ import {useParams} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 import {useState, useEffect} from "react";
 import {useMemo} from "react";
-import {fetchDay, searchFoods, addEntry} from "../services/api.js";
+import {fetchDay, deleteEntry } from "../services/api.js";
 import MacroProgress from "../components/MacroProgress";
 import "../css/Day.css";
 
@@ -66,6 +66,19 @@ const Day = ({user}) => {
     }); // e.g. Dec 10, 2025
   }, [dayLog.date]);
 
+  const handleDelete = async (entryId) => {
+    try {
+      await deleteEntry(entryId);
+      setLoading(true);
+      const data = await fetchDay(date);
+      setDayLog(data);
+    } catch (error) {
+      setError(error.msg || "Failed to delete entry");
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
@@ -126,15 +139,20 @@ const Day = ({user}) => {
 
                 <div className="entries">
                   {meal.entries.map(entry => (
-                    <div key={entry.id} className="entry-row" onClick={() => navigate(`/day/${date}/meal/${meal.id}/entry/${entry.id}`)}>
+                    <div key={entry.id} className="entry-row"
+                         onClick={() => navigate(`/day/${date}/meal/${meal.id}/entry/${entry.id}`)}>
                       <span className="entry-name">{entry.food.name}</span>
                       <span
                         className="entry-details">{entry.food.brand} — {entry.quantity}{entry.food.serving_unit}</span>
                       <span className="entry-calories">
                       {(entry.quantity * entry.food.calories / 100).toFixed(0)} cal
                     </span>
+                      <button className="entry-delete" onClick={(e) => {
+                        e.stopPropagation();
+                        handleDelete(entry.id)
+                      }}>X
+                      </button>
                     </div>
-
                   ))}
                 </div>
 
