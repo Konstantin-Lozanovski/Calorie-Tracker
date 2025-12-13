@@ -18,7 +18,7 @@ h1 {
 .days-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr); /* exactly 7 days per row */
-    gap: 16px;
+    gap: 20px;
     width: 100%;
 }
 
