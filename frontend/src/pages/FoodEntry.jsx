@@ -37,8 +37,8 @@ export default function FoodEntry() {
           const foodData = await fetchFood(foodId);
           setFood(foodData);
         }
-      } catch (err) {
-        setError(err.msg || "Failed to fetch data");
+      } catch (error) {
+        setError(error);
       } finally {
         setLoading(false);
       }
@@ -55,13 +55,12 @@ export default function FoodEntry() {
         await addEntry(mealId, foodId, Number(quantity));
       }
       navigate(`/day/${date}`);
-    } catch (err) {
-      setError(err.msg || "Failed to add entry");
+    } catch (error) {
+      setError(error);
     }
   };
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
 
   return (
     <div className="food-entry-container">
@@ -111,6 +110,7 @@ export default function FoodEntry() {
 
 
         <button onClick={handleAdd}>{isEditing ? "Update" : "Add"}</button>
+        {error && <p className="error-msg">{error}</p>}
       </div>
     </div>
   );

@@ -88,7 +88,7 @@ const Day = ({user}) => {
       const data = await fetchDay(date);
       setDayLog(data);
     } catch (error) {
-      setError(error.msg || "Failed to delete entry");
+      setError(error);
     } finally {
       setLoading(false);
     }

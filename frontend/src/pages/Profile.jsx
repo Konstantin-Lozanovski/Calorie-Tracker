@@ -34,7 +34,7 @@ export default function Profile({user, setUser}) {
       Number(form.fatGoalPct);
 
     if (totalPct !== 100) {
-      setError({msg: "Protein, carbs, and fat percentages must add up to 100%"});
+      setError("Protein, carbs, and fat percentages must add up to 100%");
       return;
     }
 
@@ -119,7 +119,7 @@ export default function Profile({user, setUser}) {
           <button className="save-btn" type="submit">Save Changes</button>
           {/* Success message */}
           {success && <p className="success-msg">Goals updated successfully!</p>}
-          {error && <p className="error-msg">{error.msg}</p>}
+          {error && <p className="error-msg">{error}</p>}
         </form>
       </div>
     </div>
