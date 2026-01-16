@@ -18,15 +18,6 @@ export const getMe = async (req, res) => {
 export const updateGoals = async (req, res) => {
     const {calorieGoal, proteinGoalPct, carbsGoalPct, fatGoalPct, weightGoal} = req.body
 
-    if(!calorieGoal || !proteinGoalPct || !carbsGoalPct || !fatGoalPct || !weightGoal) {
-        throw new BadRequestError("Please provide calories, protein, carbs, fat and weight goal")
-    }
-
-    const totalPct = Number(proteinGoalPct) + Number(carbsGoalPct) + Number(fatGoalPct)
-    if(totalPct !== 100) {
-        throw new BadRequestError("Macronutrient percentages must add up to 100%")
-    }
-
     const result = await pool.query(
         `UPDATE users
         SET calorie_goal = $1, protein_goal_pct = $2, carbs_goal_pct = $3, fat_goal_pct = $4, weight_goal = $5
@@ -41,6 +32,4 @@ export const updateGoals = async (req, res) => {
     }
 
     res.status(200).json(result.rows[0])
-
-
 }
