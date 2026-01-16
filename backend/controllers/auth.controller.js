@@ -5,19 +5,6 @@ import { BadRequestError, UnauthenticatedError, ConflictError } from "../errors/
 
 export const register = async (req, res) => {
     let { username, password, email } = req.body
-    if ( !username || !password || !email) {
-        throw new BadRequestError("Please provide username, email and password")
-    }
-
-    username = username.trim();
-    email = email.trim().toLowerCase();
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!emailRegex.test(email)) {
-        throw new BadRequestError("Please provide a valid email");
-    }
-
 
     const { rows: existing } = await pool.query(
         "SELECT username, email FROM users WHERE username = $1 OR email = $2",
@@ -66,11 +53,6 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
     let { email, password } = req.body
-    if (!email || !password) {
-        throw new BadRequestError("Please provide email and password")
-    }
-
-    email = email.trim().toLowerCase();
 
     const { rows } = await pool.query("SELECT * FROM users WHERE email = $1", [
         email,
