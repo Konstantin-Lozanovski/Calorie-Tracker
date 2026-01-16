@@ -23,8 +23,8 @@ const AddFood = () => {
         setLoading(true);
         const data = await searchFoods(query);
         setResults(data);
-      } catch (err) {
-        setError(err.msg || "Failed to search foods");
+      } catch (error) {
+        setError(error);
       } finally {
         setLoading(false);
       }
@@ -37,8 +37,8 @@ const AddFood = () => {
     try {
       await addEntry(mealId, foodId, 100); // 100g by default
       navigate(`/day/${date}`);
-    } catch (err) {
-      setError(err.msg || "Failed to add food");
+    } catch (error) {
+      setError(error);
     }
   };
 

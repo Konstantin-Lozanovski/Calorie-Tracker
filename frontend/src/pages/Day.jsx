@@ -62,7 +62,7 @@ const Day = ({user}) => {
         const data = await fetchDay(date);
         setDayLog(data);
       } catch (error) {
-        setError(error.msg || "Failed to fetch daily log");
+        setError(error);
       } finally {
         setLoading(false);
       }
