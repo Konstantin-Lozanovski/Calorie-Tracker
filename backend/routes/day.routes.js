@@ -1,4 +1,6 @@
 import express from "express"
+import {validate} from "../middleware/validation.js";
+import {updateWeightSchema, dateSchema} from "../schemas/day.schema.js";
 import {
   getDay,
   updateWeight,
@@ -6,8 +8,7 @@ import {
 
 const router = express.Router()
 
-// Specific order: 'history' must come BEFORE ':date' so it isn't treated as a date string
-router.get("/:date", getDay)
-router.put("/:date/weight", updateWeight)
+router.get("/:date", validate(dateSchema, "params"), getDay)
+router.put("/:date/weight", validate(updateWeightSchema, "body"), validate(dateSchema, "params"), updateWeight)
 
 export default router
