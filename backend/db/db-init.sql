@@ -62,6 +62,16 @@ CREATE INDEX idx_food_name_lower
 CREATE INDEX idx_food_brand_lower
     ON foods (LOWER(COALESCE(brand, '')));
 
+CREATE INDEX idx_daily_logs_user_id ON daily_logs(user_id);
+CREATE INDEX idx_meals_daily_log_id ON meals(daily_log_id);
+CREATE INDEX idx_meal_entries_meal_id ON meal_entries(meal_id);
+CREATE INDEX idx_meal_entries_food_id ON meal_entries(food_id);
+
+
+ALTER TABLE meal_entries
+    ADD CONSTRAINT check_quantity_positive CHECK (quantity > 0);
+
+
 
 
 
