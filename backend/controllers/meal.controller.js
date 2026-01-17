@@ -5,10 +5,6 @@ export const addEntry = async (req, res) => {
   const {mealId} = req.params
   const {foodId, quantity} = req.body
 
-  if (!foodId || quantity === undefined || quantity <= 0) {
-    throw new BadRequestError("Please provide a valid foodId and a quantity greater than 0");
-  }
-
   const mealResult = await pool.query(
     `SELECT *
      FROM meals
@@ -43,8 +39,6 @@ export const addEntry = async (req, res) => {
 export const updateEntry = async (req, res) => {
   const {entryId} = req.params
   const {quantity} = req.body
-
-  if (quantity === undefined || quantity < 0) throw new BadRequestError("Provide a valid quantity");
 
   if (quantity === 0) {
     const result = await pool.query(
@@ -89,8 +83,6 @@ export const deleteEntry = async (req, res) => {
 
 export const getEntry = async (req, res) => {
   const {entryId} = req.params
-
-  if (!entryId) throw new BadRequestError("Please provide a entry id")
 
   const result = await pool.query(
     `SELECT *
