@@ -53,4 +53,17 @@ CREATE TABLE IF NOT EXISTS meal_entries (
     quantity NUMERIC NOT NULL -- Amount of serving_unit
     );
 
+CREATE UNIQUE INDEX idx_daily_logs_user_date
+    ON daily_logs (user_id, date)
+
+CREATE INDEX idx_food_name_lower
+    ON foods (LOWER(name));
+
+CREATE INDEX idx_food_brand_lower
+    ON foods (LOWER(COALESCE(brand, '')));
+
+
+
+
+
 
