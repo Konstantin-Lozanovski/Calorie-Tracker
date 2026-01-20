@@ -20,11 +20,10 @@ backend/dist/
 *.local
 
 # Environment variables
-.env
 frontend/.env
 backend/.env
-backend/src/.env
 frontend/src/.env
+backend/src/.env
 
 # Editor directories and files
 .vscode/*
