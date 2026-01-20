@@ -9,7 +9,7 @@ export default function Profile({user, setUser}) {
     proteinGoalPct: user.protein_goal_pct,
     carbsGoalPct: user.carbs_goal_pct,
     fatGoalPct: user.fat_goal_pct,
-    weightGoal: user.weight_goal || ""
+    weightGoal: Number(user.weight_goal)
   });
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
@@ -41,6 +41,7 @@ export default function Profile({user, setUser}) {
     try {
       const data = await updateUserGoals(form)
       setUser(data)
+      localStorage.setItem('user', JSON.stringify(data))
       setSuccess(true)
       setTimeout(() => {
         setSuccess(false);
