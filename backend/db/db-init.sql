@@ -1,7 +1,7 @@
 -- 1. Users Table
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
-    email VARCHAR(255) UNIQUE NOT NULL;
+    email VARCHAR(255) UNIQUE NOT NULL,
     username VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     calorie_goal INTEGER DEFAULT 2000,
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS meal_entries (
     );
 
 CREATE UNIQUE INDEX idx_daily_logs_user_date
-    ON daily_logs (user_id, date)
+    ON daily_logs (user_id, date);
 
 CREATE INDEX idx_food_name_lower
     ON foods (LOWER(name));

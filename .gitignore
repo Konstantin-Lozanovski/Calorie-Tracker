@@ -23,6 +23,8 @@ backend/dist/
 .env
 frontend/.env
 backend/.env
+backend/src/.env
+frontend/src/.env
 
 # Editor directories and files
 .vscode/*
