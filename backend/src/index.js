@@ -1,6 +1,5 @@
 import express from "express"
 import cors from "cors"
-import dotenv from "dotenv"
 import { pool } from "./db.js"
 import "express-async-errors"
 
@@ -17,7 +16,6 @@ import notFoundMiddleware from "../middleware/not-found.js"
 import errorHandlerMiddleware from "../middleware/error-handler.js"
 import authenticateUser from "../middleware/authentication.js"
 
-dotenv.config()
 
 const app = express()
 

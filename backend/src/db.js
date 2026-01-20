@@ -1,6 +1,10 @@
 import pkg from "pg"
 const { Pool } = pkg
 
+import dotenv from "dotenv";
+dotenv.config();  // <--- FIX
+
+
 export const pool = new Pool({
   user: "konstantin", // your DB username
   host: "localhost",
