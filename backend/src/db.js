@@ -6,9 +6,9 @@ dotenv.config();  // <--- FIX
 
 
 export const pool = new Pool({
-  user: "konstantin", // your DB username
-  host: "localhost",
-  database: "Calorie-Tracker", // your database name
-  password: "konstantin2004", // your DB password
+  user: process.env.DB_USER, // your DB username
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME, // your database name
+  password: process.env.DB_PASSWORD, // your DB password
   port: 5432, // default PostgreSQL port
 })
