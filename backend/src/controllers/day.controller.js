@@ -1,4 +1,4 @@
-import { pool } from "../src/db.js"
+import { pool } from "../db.js"
 import {BadRequestError} from "../errors/index.js";
 
 export const getDay = async (req, res) => {

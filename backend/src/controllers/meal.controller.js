@@ -1,4 +1,4 @@
-import {pool} from "../src/db.js"
+import {pool} from "../db.js"
 import {BadRequestError, NotFoundError} from "../errors/index.js";
 
 export const addEntry = async (req, res) => {

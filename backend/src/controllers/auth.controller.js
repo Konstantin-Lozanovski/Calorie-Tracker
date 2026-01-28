@@ -1,4 +1,4 @@
-import { pool } from "../src/db.js"
+import { pool } from "../db.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import { BadRequestError, UnauthenticatedError, ConflictError } from "../errors/index.js"

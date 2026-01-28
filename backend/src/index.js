@@ -4,17 +4,17 @@ import { pool } from "./db.js"
 import "express-async-errors"
 
 // Routers
-import authRouter from "../routes/auth.routes.js"
-import userRouter from "../routes/user.routes.js"
-import dayRouter from "../routes/day.routes.js"
-import mealRouter from "../routes/meal.routes.js"
-import foodRouter from "../routes/food.routes.js"
+import authRouter from "./routes/auth.routes.js"
+import userRouter from "./routes/user.routes.js"
+import dayRouter from "./routes/day.routes.js"
+import mealRouter from "./routes/meal.routes.js"
+import foodRouter from "./routes/food.routes.js"
 
 
 //Middleware
-import notFoundMiddleware from "../middleware/not-found.js"
-import errorHandlerMiddleware from "../middleware/error-handler.js"
-import authenticateUser from "../middleware/authentication.js"
+import notFoundMiddleware from "./middleware/not-found.js"
+import errorHandlerMiddleware from "./middleware/error-handler.js"
+import authenticateUser from "./middleware/authentication.js"
 
 
 const app = express()
