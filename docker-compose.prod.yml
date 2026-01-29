@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: "konstantin2004"
       POSTGRES_DB: "Calorie-Tracker"
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./backend/src/db/db-init.sql:/docker-entrypoint-initdb.d/db-init.sql
