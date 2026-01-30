@@ -23,8 +23,8 @@ jobs:
           image: calorie-tracker
           registry: ghcr.io
           githubOrg: konstantin-lozanovski
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ secrets.GHCR_USERNAME }}
+          password: ${{ secrets.GHCR_TOKEN }}
           pushImage: ${{ github.event_name == 'push' }}
           tags: latest,${{ github.sha }}
           dockerfile: backend/Dockerfile
