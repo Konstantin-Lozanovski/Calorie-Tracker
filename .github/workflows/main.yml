@@ -1,0 +1,32 @@
+name: Docker CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build & maybe push
+        uses: mr-smithers-excellent/docker-build-push@v6
+        with:
+          image: image-name
+          registry: ghcr.io
+          githubOrg: your-username
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          pushImage: ${{ github.event_name == 'push' }}
+          tags: latest,${{ github.sha }}
+          dockerfile: backend/Dockerfile
+          directory: backend
+
