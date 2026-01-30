@@ -39,7 +39,7 @@ const port = process.env.PORT || 4000
 const start = async () => {
   try {
     await pool.query("SELECT NOW()")
-    app.listen(port, () => {console.log(`Server listening on port ${port}...`)})
+    app.listen(port, () => {console.log(`Server listening on portaaaa ${port}...`)})
   } catch (error) {
     console.log(error)
   }
