@@ -5,16 +5,16 @@ services:
     image: postgres:15
     restart: always
     environment:
-      POSTGRES_USER: "konstantin"
-      POSTGRES_PASSWORD: "konstantin2004"
-      POSTGRES_DB: "Calorie-Tracker"
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./backend/db/db-init.sql:/docker-entrypoint-initdb.d/db-init.sql
+      - ./backend/src/db/db-init.sql:/docker-entrypoint-initdb.d/db-init.sql
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U konstantin -d Calorie-Tracker" ]
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}" ]
       interval: 5s
       timeout: 5s
       retries: 5

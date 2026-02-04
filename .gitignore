@@ -39,3 +39,5 @@ backend/src/.env
 
 # Misc
 coverage/
+docker-compose.prod.yml
+docker-compose.yml

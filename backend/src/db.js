@@ -10,5 +10,5 @@ export const pool = new Pool({
   host: process.env.DB_HOST,
   database: process.env.DB_NAME, // your database name
   password: process.env.DB_PASSWORD, // your DB password
-  port: 5433, // default PostgreSQL port
+  port: 5432, // default PostgreSQL port
 })
