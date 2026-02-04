@@ -18,7 +18,7 @@ A simple calorie tracking application with a Node.js backend, PostgreSQL databas
 
 1. **Clone the repository**
 ```bash
-git clone <repo-url>
+git clone https://github.com/Konstantin-Lozanovski/Calorie-Tracker
 cd Calorie-Tracker
 ```
 
@@ -108,8 +108,7 @@ docker compose -f docker-compose.build.yml down -v
 ---
 
 ## **Testing the API**
-
-- You can use tools like [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/) to test backend endpoints.  
+  
 - Backend API is available at `http://localhost:4000`.  
 - Frontend will automatically interact with the backend and can be tested at the URL shown by Vite (usually `http://localhost:5173`).
 
