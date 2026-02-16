@@ -15,14 +15,15 @@ const errorHandlerMiddleware = (err, req, res, _next) => {
   // 3. Postgres Unique Violation (e.g. Duplicate Username)
   // Postgres uses string codes. '23505' is unique_violation
   if (err.code === '23505') {
+    //console.log(err.detail?)****
     customError.msg = `Duplicate value entered for ${err.constraint || 'field'}, please choose another value`
-    customError.statusCode = 400
+    customError.statusCode = StatusCodes.BAD_REQUEST
   }
 
   // 4. Postgres Foreign Key Violation (Invalid user_id)
   if (err.code === '23503') {
       customError.msg = `Invalid reference to another resource`
-      customError.statusCode = 404
+      customError.statusCode = StatusCodes.NOT_FOUND
   }
 
   return res.status(customError.statusCode).json({ msg: customError.msg })
