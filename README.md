@@ -110,7 +110,7 @@ docker compose -f docker-compose.build.yml down -v
 ## **Testing the API**
   
 - Backend API is available at `http://localhost:4000`.  
-- Frontend will automatically interact with the backend and can be tested at the URL shown by Vite (usually `http://localhost:5173`).
+- Frontend will automatically interact with the backend and can be tested at the URL shown by Vite (`http://localhost:5173`).
 
 ---
 
