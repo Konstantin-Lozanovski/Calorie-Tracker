@@ -3,10 +3,6 @@ const { Pool } = pkg
 
 import {DB_USER, DB_HOST, DB_NAME, DB_PASSWORD} from "./config/env.js"
 
-console.log("HI")
-console.log(DB_USER, DB_HOST, DB_NAME, DB_PASSWORD)
-
-
 export const pool = new Pool({
   user: DB_USER, // your DB username
   host: DB_HOST,
