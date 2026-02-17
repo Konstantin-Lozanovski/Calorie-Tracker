@@ -2,6 +2,7 @@ import express from "express"
 import cors from "cors"
 import { pool } from "./db.js"
 import "express-async-errors"
+import {PORT} from "./config/env.js"
 
 // Routers
 import authRouter from "./routes/auth.routes.js"
@@ -34,7 +35,7 @@ app.use("/api/foods", authenticateUser, foodRouter)
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
 
-const port = process.env.PORT || 4000
+const port = PORT || 4000
 
 const start = async () => {
   try {
