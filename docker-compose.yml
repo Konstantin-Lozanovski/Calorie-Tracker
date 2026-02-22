@@ -19,7 +19,7 @@ services:
       timeout: 5s
       retries: 5
   backend:
-    image: ghcr.io/konstantin-lozanovski/calorie-tracker:3c4a67da763b6062aa6dfb1ce5de8af4aa72f1c3
+    image: ghcr.io/konstantin-lozanovski/calorie-tracker:69232b4a0131f1e1db8c09d9a7a14c2e3e390b00
     restart: always
     env_file:
       - backend/.env
