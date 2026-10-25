@@ -1,14 +1,23 @@
 import {Link} from "react-router-dom"
 import {useNavigate} from "react-router-dom"
 import "../css/Header.css"
+import {useRef} from "react";
 
 function Header({user, setUser}) {
   const navigate = useNavigate()
+  const collapseRef = useRef(null);
   const logout = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("user")
 
     setUser(null)
+
+    if (collapseRef.current) {
+      const bsCollapse = Collapse.getInstance(collapseRef.current);
+      if (bsCollapse) {
+        bsCollapse.hide();
+      }
+    }
 
     navigate("/login")
   }
